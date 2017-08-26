@@ -9,6 +9,8 @@ package leetcode_sol;
 
 public class Sol_53 {
 	
+	
+	//the following is the O(n) solution
 	public int maxSubArray(int[] nums) {
 		int sum = nums[0];
 		int pos = nums[0];
