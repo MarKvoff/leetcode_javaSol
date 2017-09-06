@@ -15,13 +15,17 @@ public class Sol_560 {
 		int count = 0;
 		int sum = 0;
 		
+		//In this map the key is the sum, the value is the total number of the cumulative sum appears;
 		HashMap<Integer, Integer> sums = new HashMap<Integer, Integer>();
+		sums.put(0, 1);
 		
-		
-		
-		
-		
-        
+		for (int i = 0; i < nums.length; i++) {
+			sum += nums[i];
+			if (sums.containsKey(sum - k))
+				count += sums.get(sum-k);
+			sums.put(sum, sums.getOrDefault(sum, 0) + 1);	
+		}
+		return count;
     }
 
 }
