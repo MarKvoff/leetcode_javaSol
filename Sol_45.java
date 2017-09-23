@@ -11,32 +11,29 @@ package leetcode_sol;
 public class Sol_45 {
 	
 	public int jump(int[] nums) {
+		if (nums.length == 1)
+			return 0;
         
-        int maxStep = nums[0], nowIndex = 0, jumps = 1;
+        int checkFromThisIndex = 1, endCheckIndex = nums[0], maxIndex = nums[0], jumps = 1;
         
-        
-        while (maxStep < nums.length - 1) {
-            for (int i = maxStep; i > nowIndex; i--)
-                maxStep = Math.max(maxStep, i + nums[i]);
-            nowIndex = maxStep;
-            System.out.println(nowIndex);
+        while (maxIndex < nums.length - 1) {
+        		
+            for (int i = checkFromThisIndex ; i <= endCheckIndex; i++) {
+            		maxIndex = Math.max(maxIndex, i + nums[i]);
+            	
+            }
+            
+            checkFromThisIndex = endCheckIndex + 1;
+            endCheckIndex = maxIndex;
             jumps++;
-            
-            
-            
         }
-        
         return jumps;
     }
 	
 	public static void main(String[] args) {
-		int[] nums = {2,3,1,1,1,2,4,1,1,1,1,4};
+		int[] nums = {2,3,1};
 		Sol_45 solution = new Sol_45();
-		
-		
-		
 		System.out.println(solution.jump(nums));
-		
 		
 	}
 
