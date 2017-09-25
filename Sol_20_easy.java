@@ -11,22 +11,36 @@ import java.util.*;
  */
 public class Sol_20_easy {
 	
-	public boolean isValid(String s) {
+	public static boolean isValid(String s) {
 		
         Stack<Character> Parentheses = new Stack<>();
         char[] str = s.toCharArray();
+        System.out.println(str);
         for (char c : str) {
+        		System.out.println(c);
         		if (c == '(' || c == '[' || c == '{')
         			Parentheses.push(c);
-        		if (c == '}' || c == '}' || c == '}')
-        			if (Parentheses.pop() != c)
+        		
+        		if (c == ')')
+        			if (Parentheses.isEmpty() || Parentheses.pop() != '(')
+        				return false;
+        		if (c == ']')
+        			if (Parentheses.isEmpty() || Parentheses.pop() != '[')
+        				return false;
+        		if (c == '}')
+        			if (Parentheses.isEmpty() || Parentheses.pop() != '{')
         				return false;
         	
         }
-        
-        return true;
-        
+        if (Parentheses.isEmpty())
+        		return true;
+        else
+        		return false;
         
     }
+	
+	public static void main(String[] args) {
+		Sol_20_easy.isValid("()");
+	}
 
 }
