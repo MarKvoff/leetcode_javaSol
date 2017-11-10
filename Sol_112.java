@@ -1,5 +1,13 @@
 package leetcode_sol;
 
+/**
+ * This is the solution for problems in leetcode.com 
+ * Question 112. Path Sum
+ * 
+ * @author czm
+ * 
+ *
+ */
 public class Sol_112 {
 	
 	public boolean hasPathSum(TreeNode root, int sum) {
