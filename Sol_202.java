@@ -1,5 +1,13 @@
 package leetcode_sol;
 
+/**
+ * This is the solution for problems in leetcode.com 
+ * Question  202. Happy Number
+ * 
+ * @author czm
+ * 
+ *
+ */
 public class Sol_202 {
 	
 	public boolean isHappy(int n) {
