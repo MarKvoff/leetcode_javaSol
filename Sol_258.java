@@ -2,7 +2,7 @@ package leetcode_sol;
 
 /**
  * This is the solution for problems in leetcode.com 
- * Question 257. Binary Tree Paths
+ * Question 258. Add Digits
  * 
  * @author czm
  * 
