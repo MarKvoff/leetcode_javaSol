@@ -11,46 +11,39 @@ import java.util.*;
  */
 public class Sol_438 {
 	
+	
 	public List<Integer> findAnagrams(String s, String p) {
 		
+		int[] hit = new int[26];
+		
+		for (char i : p.toCharArray()) 
+			hit[i - 97]++;
+		
 		List<Integer> res = new ArrayList<Integer>();
-		if (s == null || p == null || s.length() == 0 || p.length() == 0)
+		if (s == null || s.length() == 0 || p == null || p.length() == 0) 
 			return res;
+		int front = 0, end = 0, count = p.length();
 		
-		int[] map = new int[26];
-		
-		for (char c : p.toCharArray())
-			map[c - 97]++;
-		
-		int left = 0, right = 0, count = p.length();
-		
-		while (right < s.length()) {
+		while (end < s.length()) {
 			
-			if (map[s.charAt(right++) - 97]-- > 0)
+			if (--hit[s.charAt(end++) - 97] >= 0)
 				count--;
 			
+			if (count == 0)
+				res.add(front);
 			
-			
-			
-			
+			if ((end - front) == p.length() && ++hit[s.charAt(front++) - 97] > 0)
+				count++;
 		}
 		
+		return res;
 		
-		
-		
-		
-		
-		
-		
-		
-		
-        return res;
     }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int a = 'a';
-		System.out.println(a);
+		int x = 'a';
+		System.out.println(x);
 
 	}
 
