@@ -10,40 +10,44 @@ import java.util.*;
  *
  */
 public class Sol_508 {
-	
-	public int[] findFrequentTreeSum(TreeNode root) {
+	HashMap<Integer, Integer> map;
+    int max;
+    
+    public int[] findFrequentTreeSum(TreeNode root) {
         
-        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        map = new HashMap<Integer, Integer>();
+        max = 0;
         
-        sumCount(map, root);
+        sumCount(root);
         
-        int max = 0;
-        for (int i: map.values())
-        	max = Math.max(max, i);
         List<Integer> res = new LinkedList<>();
-        for (int i : map.keySet())
-        	if (max == map.get(i))
-        		res.add(i);
+        for (int key : map.keySet()) {
+            if (map.get(key) == max) {
+                res.add(key);
+            }
+        }
         
-        int[] a = new int[res.size()];
-        a = res.toArray();
-        return res;
-        
-        
+        int[] result = new int[res.size()];
+        for (int i = 0; i < res.size(); i++) {
+            result[i] = res.get(i);
+        }
+        return result;
         
     }
     
     
-    private int sumCount(HashMap<Integer, Integer> map, TreeNode node) {
+    private int sumCount(TreeNode node) {
         
         if (node == null)
             return 0;
         
-        int sum = sumCount(map, node.left) + sumCount(map, node.right) + node.val;
-        map.put(map.get(sum), map.getOrDefault(sum, 0) + 1);
+        int sum = sumCount(node.left) + sumCount(node.right) + node.val;
+        int count = map.getOrDefault(sum, 0) + 1;
+        map.put(sum, count);
+        max = Math.max(max, count);
+        
         return sum;
     }
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
