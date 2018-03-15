@@ -10,20 +10,20 @@ package leetcode_sol;
  */
 public class Sol_647 {
 	
-	public int countSubstrings(String s) {
+public int countSubstrings(String s) {
         
         int len = s.length();
         boolean[][] dp = new boolean[len][len];
         for (int i = 0; i < len; i++)
             dp[i][i] = true;
         
-        for (int i = 0; i < len; i++)
+        for (int i = len - 1; i >= 0; i--)
             for (int j = i + 1; j < len; j++) {
                 
                 if (j == i + 1)
                     dp[i][j] = s.charAt(i) == s.charAt(i + 1) ? true : false;
                 else
-                    dp[i][j] = dp[i + 1][j - 1] && s.charAt(i) == s.charAt(i + 1);
+                    dp[i][j] = dp[i + 1][j - 1] && s.charAt(i) == s.charAt(j);
                 
             }
         
@@ -39,6 +39,7 @@ public class Sol_647 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
 
 	}
 
