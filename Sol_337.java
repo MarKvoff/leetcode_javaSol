@@ -10,6 +10,35 @@ package leetcode_sol;
  */
 public class Sol_337 {
 	
+	//dfs solution;
+	public int rob(TreeNode root) {
+        
+        int[] top = robTree(root);
+        return Math.max(top[0], top[1]);
+        
+    }
+    
+    
+    public int[] robTree(TreeNode node) {
+    
+        if(node == null)
+            return new int[2];
+        
+        int[] left = robTree(node.left);
+        int[] right = robTree(node.right);
+        //index 1 for robbed, 0 for sikpped
+        int[] now = new int[2];
+        
+        now[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+        now[1] = node.val + left[0] + right[0];
+        return now;
+        
+    }
+	
+	
+	
+	
+	/* not dfs solution
 	public int rob(TreeNode root) {
         
         return Math.max(robTree(root, false), robTree(root, true));
@@ -29,6 +58,8 @@ public class Sol_337 {
         }
         
     }
+    
+    */
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
