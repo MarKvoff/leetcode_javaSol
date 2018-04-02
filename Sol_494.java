@@ -10,26 +10,29 @@ import java.util.*;
  */
 public class Sol_494 {
 	
-	public int findTargetSumWays(int[] nums, int S) {
+	private int count;
+    public int findTargetSumWays(int[] nums, int S) {
+        count = 0;
+        dfs(nums, 0, S);
+        return count;
+    }
+    
+    private void dfs(int[] nums, int index, int S) {
         
-        HashMap<Integer, Integer> map = new HashMap<>();
+        if (index == nums.length && S == 0)
+            count++;
         
-        for (int i : nums) {
+        if (index == nums.length)
+            return;
+        
+        for (int i = -1; i < 2; i +=2) {
             
-            if (!map.isEmpty()) {
-            		Set<Integer> set = new HashSet<Integer>();
-                for (Integer key : map.keySet()) {
-                		map.put(key + i, map.getOrDefault(key + i, 0) + 1);
-                		map.put(key - i, map.getOrDefault(key - i, 0) + 1);
-                }     
-                
-            } else {
-            		map.put(i, 1);
-            		map.put(-i, 1);
-            }
+            S = S - i*nums[index];
+            dfs(nums, index + 1, S);
+            S =  S + i*nums[index];
+            
         }
         
-        return map.getOrDefault(S, 0);
     }
 
 	public static void main(String[] args) {
