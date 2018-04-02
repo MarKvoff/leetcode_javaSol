@@ -10,40 +10,28 @@ import java.util.*;
  */
 public class Sol_491 {
 	
-    public List<List<Integer>> findSubsequences(int[] nums) {
+	public List<List<Integer>> findSubsequences(int[] nums) {
         
-        List<List<Integer>> res = new LinkedList<List<Integer>>();
-		List<List<Integer>> holder = new LinkedList<List<Integer>>();
+        Set<List<Integer>> res = new HashSet<List<Integer>>();
+        dfs(res, new LinkedList<Integer>(), nums, 0);
+        List<List<Integer>> list = new ArrayList<>(res);
+        return list;
+        
+    }
     
-		if (nums.length < 2)
-			return res;
-    
-		int end = 1;
-		while (end < nums.length) {
+    private void dfs(Set<List<Integer>> res, List<Integer> tmp, int[] nums, int index) {
         
-			if (nums[end - 1] <= nums[end]) {
-				if (!holder.isEmpty()) {
-					for (List<Integer> piece : holder)
-						piece.add(nums[end]);
-                    List<Integer> str = new ArrayList<Integer>();
-                    str.add(nums[end - 1]);
-                    str.add(nums[end]);
-                    holder.add(str);
-                    
-                } else {
-					List<Integer> start = new ArrayList<Integer>();
-					start.add(nums[end - 1]);
-					start.add(nums[end]);
-					holder.add(start);
-				}
-            	res.addAll(holder);
-        	} else {
-        		holder.clear();
-        	}
-            end++;
-		}
+        if (tmp.size() > 1)
+            res.add(new ArrayList<Integer>(tmp));
         
-        return res;
+        for (int i = index; i < nums.length; i++) {
+            if (tmp.isEmpty() || nums[i] >= tmp.get(tmp.size() - 1)) {
+                tmp.add(nums[i]);
+                dfs(res, tmp, nums, i + 1);
+                tmp.remove(tmp.size() - 1);
+            }
+        }
+        
     }  
         
   
